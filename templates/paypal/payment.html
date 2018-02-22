@@ -1,0 +1,32 @@
+{% extends 'paypal/base.html' %}
+{% load static %}
+
+{% block main %}
+
+<div class="container">
+	<h2><u><b>Registration Portal</b></u></h2>
+
+	<h4 style="text-align: center;">Click <a href="{% static 'img/form/CPAL_Enrollment_form.doc' %}">here</a> to download enrollment form.</h4>
+	
+	<div class="container">
+	{% for registration in registrations %}
+		<div class="col-md-6">
+    		<div class="panel panel-success">
+		    	<div class="panel-heading" style="text-align: center;"><b>Course</b> : {{registration.course_name}}</div>
+		    	<div class="panel-body" style="height: 200px;overflow: scroll">
+			    		<li><b>Detail</b> : {{registration.course_dtails}}</li>
+			    		<li><b>Course Fee : </b>{{registration.registration_fee}} dollars</li>   	
+		    	</div>
+		    	<div class="panel-footer" style="text-align: center;"><a href="https://paypal.me/ctr4PAL/{{ registration.registration_fee }}/">Register</a> </li></div>
+			</div>
+		</div>
+	{% endfor %}
+	</div>
+	
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+{% endblock %}
