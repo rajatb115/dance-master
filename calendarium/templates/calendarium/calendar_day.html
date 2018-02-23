@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block main %}
+
+<div class="container">
+      <div class="row">
+        <div class="col-md-9 ">
+        <h1>{% trans "Occurrences" %}</h1>
+            <form action="." method="post">
+                {% csrf_token %}
+
+                    <div class="row">
+                        <div class="col-md-4 ">
+                            <input class="btn btn-default" type="submit" name="previous" value="{% trans "Previous" %}" />
+                        </div>
+                        <div class="col-md-4 ">
+                            <input class="btn btn-default" type="submit" name="next" value="{% trans "Next" %}" />
+                        </div>
+                        <div class="col-md-4 ">
+                            <input class="btn btn-default" type="submit" name="today" value="{% trans "Today" %}" />
+                        </div>
+                    </div>
+                <!--{% if request.user.is_staff %}
+                    <a href="{% url "calendar_event_create" %}">{% trans "Create new event" %}</a>
+                {% endif %} -->
+            </form>
+            <table class="table">
+                <tr>
+                    <th>{{ date|date:'D m/d' }}</th>
+                </tr>
+                <td>
+                    {% for occurrence in occurrences %}
+                        <ul>
+                            <li><u><b>{{ occurrence }}</b></u> : {{occurrence.description}}</li>
+                        </ul>
+                    {% endfor %}
+                </td>
+            </table>
+        </div>
+        <div class="col-md-3 ">
+            <div class="well">
+            {% include "calendarium/partials/category_list.html" %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
